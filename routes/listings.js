@@ -20,6 +20,8 @@ var fsUrl = config.foursquare.url;
 
 var woUrl = config.weatherOnline.url;
 
+var day_names = require('../modules/day_names')
+
 
 /* GET listings. */
 
@@ -33,6 +35,15 @@ router.get('/', function(req, res, next) {
     var col = resp.response.groups[0].items;
     var iconSize = 32;
 
+    // var venueLocations = [];
+    var venueLats = [];
+    var venueLngs = [];
+
+    for(var i = 0; i < col.length; i++){
+      venueLats.push(col[i].venue.location.lat);
+      venueLngs.push(col[i].venue.location.lng);
+    }
+
     wo_params = {};
     wo_params.q = fs_params.near;
     wo_params.format = config.weatherOnline.format;
@@ -42,7 +53,12 @@ router.get('/', function(req, res, next) {
     wo_query(woUrl + 'key=' + woKey, wo_params, function(err, resp){
       var forecasts = resp.data.weather;
       var icon = resp.data.current_condition[0].weatherIconUrl[0].value;
-      res.render('listings', {title: 'Day-Tripper', venues: col, size: iconSize, forecasts: forecasts});
+      var dayNamesCol = [];
+      for (var i = 0; i < forecasts.length; i++) {
+        formattedDayName = day_names(forecasts[i].date)
+        dayNamesCol.push(formattedDayName);
+      }
+      res.render('listings', {title: 'Day-Tripper', venues: col, size: iconSize, forecasts: forecasts, dayNames: dayNamesCol, lats: venueLats, lngs: venueLngs});
     })
   })
 

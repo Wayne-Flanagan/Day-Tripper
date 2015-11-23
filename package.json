@@ -13,6 +13,7 @@
     "express": "~4.13.1",
     "hjs": "~0.0.6",
     "hogan-middleware": "0.0.3",
+    "moment": "^2.10.6",
     "morgan": "~1.6.1",
     "nodemon": "1.7.3",
     "request": "^2.65.0",

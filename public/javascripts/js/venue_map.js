@@ -1,34 +1,53 @@
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 6
-  });
-  var infoWindow = new google.maps.InfoWindow({map: map});
+$(function() {
+  var initializeMap;
+  this.map = null;
+  initializeMap = function() {
+    var bounds, createMarker, i, latList, longList, mapOptions, markerCluster, markers, pos;
+    pos = new google.maps.LatLng(34.824974, -40.687996);
+    mapOptions = {
+      zoom: 4,
+      center: pos,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
+    latList = [];
+    longList = [];
+    $('input[type="hidden"][name="lat"]').map(function() {
+      return latList.push($(this).val());
     });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
-}
+    $('input[type="hidden"][name="lng"]').map(function() {
+      return longList.push($(this).val());
+    });
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-}
-google.maps.event.addDomListener(window, 'load', initMap);
+    markers = [];
+    createMarker = function(i) {
+      var marker, markerOps;
+      markerOps = {
+        position: new google.maps.LatLng(latList[i], longList[i]),
+        map: this.map,
+        animation: google.maps.Animation.DROP
+      };
+      marker = new google.maps.Marker(markerOps);
+      return marker;
+    };
+
+    for (i in latList) {
+      markers.push(createMarker(i));
+    }
+    if (markers.length > 0) {
+      markerCluster = new MarkerClusterer(this.map, markers);
+    }
+    if (markers.length > 0) {
+      bounds = new google.maps.LatLngBounds();
+      markers.map(function(marker) {
+        return bounds.extend(marker.position);
+      });
+    }
+    if (markers.length > 0) {
+      return this.map.fitBounds(bounds);
+    }
+
+  };
+  return initializeMap();
+});

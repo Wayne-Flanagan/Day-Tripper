@@ -1,0 +1,4 @@
+ # We want these files in our local directory, but not in our repository
+
+ # Third-Party packages
+ node_modules

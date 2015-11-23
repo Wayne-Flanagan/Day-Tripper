@@ -1,0 +1,17 @@
+{
+  "foursquare":
+    {
+    "url": "https://api.foursquare.com/v2/venues/explore?",
+    "client_id": "IZKVXNSXDIANKYV0BP1DX3J341POMXGNPNULOHJ5FTHXJLZE",
+    "client_secret": "Z3KBHIMGAOMOPGS54NSCBL05VCTXI55PZ2JJ4VJAELR3MIJO",
+    "version": "20151001"
+    },
+  "weatherOnline":
+    {
+    "url": "https://api.worldweatheronline.com/free/v2/weather.ashx?",
+    "key": "04b27d2517fed2cb56380ab0658d2",
+    "format": "json",
+    "num_of_days": "5",
+    "tp": "24"
+    }
+}

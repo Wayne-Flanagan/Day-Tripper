@@ -1,0 +1,115 @@
+{{> header}}
+{{> navbar}}
+
+<div class="container">
+	<div class="row custom-top-margin">
+		<div class="col-md-12">
+			<table id="t-bordered">
+				<thead>
+					<tr>
+						{{#forecasts}}
+						<th class="textCenter">
+							<small>Day Name</small>
+						</th>
+						{{/forecasts}}
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						{{#forecasts}}
+						<td class="textCenter">
+							<small><em>{{date}}</em></small>
+						</td>
+						{{/forecasts}}
+					</tr>
+					<tr>
+						{{#forecasts}}
+							{{#hourly}}
+								{{#weatherIconUrl}}
+								<td class="textCenter">
+									<img class="small" src="{{value}}" alt="Weather Icon">
+								</td>
+								{{/weatherIconUrl}}
+							{{/hourly}}
+						{{/forecasts}}
+					</tr>
+					<tr>
+						{{#forecasts}}
+							{{#hourly}}
+								{{#weatherDesc}}
+								<td class="textCenter">
+									<small><em>{{value}}</em></small>
+								</td>
+								{{/weatherDesc}}
+							{{/hourly}}
+						{{/forecasts}}
+					</tr>
+					<tr>
+						{{#forecasts}}
+						<td class="textCenter">
+							<em><strong>{{maxtempC}}&#8451 &nbsp;</strong><small><sub> Lo {{mintempC}}&#8451</sub></small></em>
+						</td>
+						{{/forecasts}}
+					</tr>
+					<tr>
+						{{#forecasts}}
+						<td class="textCenter">
+							<small><em>UV Index: {{uvIndex}}</em></small>
+						</td>
+						{{/forecasts}}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-5 listings-bg" id="listings">
+					{{#venues}}
+					<li>
+						<div class="col-md-12" id="listingCont">
+
+							<div class="col-md-2" id="venueCategory">
+								{{#venue.categories}}<img src="{{icon.prefix}}bg_{{size}}{{icon.suffix}}" id="icon" alt="Venue Category Icon">{{/venue.categories}}
+								{{#venue.categories}}<small>{{shortName}}</small>{{/venue.categories}}
+							</div>
+
+							<div class="col-md-7" id="listingInfo">
+
+								<div class="col-md-12" id="venueName">
+									<a href="{{venue.url}}">{{venue.name}}</a>
+								</div>
+
+								<div class="col-md-12" id="venueAddress">
+									<small>{{venue.location.address}}, {{venue.location.city}}, {{venue.location.country}}</small>
+								</div>
+
+								<div class="col-md-12" id="venuePhone">
+									<small>{{venue.contact.formattedPhone}}</small>
+								</div>
+
+							</div>
+
+							<div class="col-md-3" style="text-align: center;" id="venueRating">
+								{{venue.rating}}
+								<br><small>{{venue.price.message}}</small>
+							</div>
+							
+						</div>
+					</li>
+					{{/venues}}
+			</div>
+			<div class="col-md-7 no-gutter">
+				<div class="col-md-12 mapBorder" id="map">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{>footer}}

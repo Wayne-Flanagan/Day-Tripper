@@ -1,0 +1,73 @@
+.bgImage{
+	width: 100%;
+	border-radius: 8px;
+    border: 25px solid #18bc9c;
+    padding: 0px;
+    height: 100vh;
+}
+
+.row.custom-top-margin{
+	margin-top: -21px;
+}
+
+#listingCont:hover{
+	background-color: #ecf0f1;
+	color: black;
+}
+
+#venueRating{
+	text-align: center;
+}
+
+li{
+	list-style-type: decimal;
+}
+
+table{
+	width: 100%;
+	background-image: url(../images/background-allweather.png);
+}
+
+.textCenter{
+	text-align: center;
+}
+
+img.small{
+	height: 44px;
+}
+
+td{
+	color: white;
+}
+
+th{
+	background-color: #2c3e50;
+	color: white;
+}
+
+
+.listings-bg{
+	background-color: #2c3e50;
+	color: white;
+	overflow: auto;
+	width: auto;
+	height: 100vh;
+}
+
+
+#t-bordered{
+    border: 20px solid #18bc9c;
+}
+
+#map{
+	height: 100vh;
+}
+
+.no-gutter{
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
+.mapBorder{
+	border: 20px solid #2c3e50;
+}
